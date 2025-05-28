@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from src.masks import get_mask_account, get_mask_card_number
 
 
@@ -11,7 +12,7 @@ def mask_account_card(type_and_number_of_card_or_account: str) -> str:
     type_ = " ".join(parts[:-1])
 
     """Условие для определения типа"""
-    if type_.lower() == 'счет':
+    if type_.lower() == "счет":
         masked_number = get_mask_account(number)
         return f"{type_} {masked_number}"
     else:
@@ -24,5 +25,5 @@ def get_date(date_: str) -> str:
     return dt.strftime("%d.%m.%Y")
 
 
-print(mask_account_card('Visa Classic 6831982476737658'))
-print(get_date('2024-03-11T02:26:18.671407'))
+print(mask_account_card("Visa Classic 6831982476737658"))
+print(get_date("2024-03-11T02:26:18.671407"))
