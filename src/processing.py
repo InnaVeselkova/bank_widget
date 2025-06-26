@@ -1,12 +1,11 @@
-def filter_by_state(dict_list, state = 'EXECUTED') -> list:
-
-#Фильтрует список словарей
-
-    return [dict_ for dict_ in dict_list if dict_.get('state') == state]
+from typing import List, Dict, Any
 
 
-def sort_by_date(dict_list, reverse=True) -> list:
+def filter_by_state(records: List[Dict[str, Any]], state: str = 'EXECUTED') -> List[Dict[str, Any]]:
+    # Фильтрует список словарей по состоянию
+    return [record for record in records if record.get('state') == state]
 
-#Функция принимает список словарей и необязательный параметр, задающий порядок сортировки (по умолчанию — убывание)
 
-    return sorted(dict_list, key=lambda dict_: dict_.get('date'), reverse=reverse)
+def sort_by_date(records: List[Dict[str, Any]], reverse: bool = True) -> List[Dict[str, Any]]:
+    # Фильтрует список словарей по дате (по умолчанию — убывание)
+    return sorted(records, key=lambda record: record.get('date') or '', reverse=reverse)
