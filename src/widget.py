@@ -24,6 +24,7 @@ def get_date(date_: str) -> str:
     dt = datetime.fromisoformat(date_)
     return dt.strftime("%d.%m.%Y")
 
+
 if __name__ == '__main__':
     print(mask_account_card("Visa Classic 6831982476737658"))
     print(get_date("2024-03-11T02:26:18.671407"))
