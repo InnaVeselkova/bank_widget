@@ -29,7 +29,7 @@ def get_mask_account(account_number: str) -> str:
     digits = "".join(filter(str.isdigit, account_number))
 
     """Проверка длины номера счета"""
-    if len(digits) != 6:
+    if len(digits) != 20:
         return "Недопустимый номер счета"
 
     """Маскируем цифры и убираем лишние"""
