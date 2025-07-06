@@ -28,7 +28,7 @@ def test_valid_date():
 
 
 def test_date_with_time():
-    assert get_date("2022-01-01T00:00:00") ==
+    assert get_date("2022-01-01T00:00:00") == "01.01.2022"
 
 
 def test_date_without_time():
