@@ -90,3 +90,17 @@ def test_sort_with_identical_dates():
     sorted_records = sort_by_date(records)
     sorted_dates = [record['date'] for record in sorted_records]
     assert sorted_dates == ['2025-11-07', '2025-11-07', '2025-11-01']
+
+
+def test_sort_with_various_date_formats():
+    records = [
+        {'id': 1, 'date': '01/11/2025'},
+        {'id': 2, 'date': '2025-11-07'},
+        {'id': 3, 'date': '11-05-2025'},
+        {'id': 4, 'date': '2025/11/02'}
+    ]
+    sorted_records = sort_by_date(records)
+    sorted_ids = [record.get('id') for record in sorted_records]
+    print(sorted_ids)
+    # Проверка: дата с id=2 должна быть первой
+    assert sorted_ids[0] == 2
