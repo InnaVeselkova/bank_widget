@@ -23,7 +23,7 @@ def test_valid_number_card():
 
 
 def test_valid_number_account():
-    assert get_mask_account("178456") == "**8456"
+    assert get_mask_account("23456754323456178456") == "**8456"
 
 
 @pytest.mark.parametrize(
