@@ -1,5 +1,6 @@
 import pytest
 
+
 @pytest.fixture
 def short_number():
     return "1234 5678 9012"
@@ -8,4 +9,3 @@ def short_number():
 @pytest.fixture
 def long_number():
     return "1234 5678 9012 3456 7822 3333 4444"
-
