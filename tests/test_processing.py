@@ -28,7 +28,7 @@ from src.processing import filter_by_state, sort_by_date
         ]
     ),
     (
-[
+    [
         {'id': 1, 'state': 'PENDING'},
         {'id': 2, 'state': 'CANCELLED'},
         {'id': 3, 'state': 'FAILED'}
@@ -81,6 +81,7 @@ def test_sort_by_date(records, expected_dates, reverse):
     dates = [record['date'] for record in sorted_records]
     assert dates == expected_dates
 
+
 def test_sort_with_identical_dates():
     records = [
         {'id': 1, 'date': '2025-11-01'},
@@ -104,3 +105,9 @@ def test_sort_with_various_date_formats():
     print(sorted_ids)
     # Проверка: дата с id=2 должна быть первой
     assert sorted_ids[0] == 2
+
+
+def test_invalied_date():
+    with pytest.raises(TypeError):
+
+        sort_by_date('test')

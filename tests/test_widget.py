@@ -1,7 +1,5 @@
 import pytest
 
-from datetime import datetime
-
 from src.widget import mask_account_card, get_date
 
 

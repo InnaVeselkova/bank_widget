@@ -40,6 +40,7 @@ def test_valid_number_account():
 def test_correct_card_number(card_number, expected):
     assert get_mask_card_number(card_number) == expected
 
+
 @pytest.mark.parametrize(
     "account_number, expected",
     [
@@ -53,6 +54,3 @@ def test_correct_card_number(card_number, expected):
 )
 def test_correct_account_number(account_number, expected):
     assert get_mask_account(account_number) == expected
-
-
-
