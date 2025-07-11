@@ -10,12 +10,12 @@ def sort_by_date(records: List[Dict[str, Any]], reverse: bool = True) -> List[Di
     # Фильтрует список словарей по дате (по умолчанию — убывание)
     try:
         return sorted(records, key=lambda record: record.get('date').replace("/", "-") or '', reverse=reverse)
-    except Exception as e:
+    except Exception:
         raise TypeError("Некорректный формат данных")
 
 
 if __name__ == '__main__':
-records = [
+    records = [
         {'id': 1, 'date': '01/11/2025'},
         {'id': 2, 'date': '2025-11-07'},
         {'id': 3, 'date': '11-05-2025'},

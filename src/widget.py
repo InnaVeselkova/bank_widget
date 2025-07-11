@@ -21,10 +21,10 @@ def mask_account_card(type_and_number_of_card_or_account: str) -> str:
 
 
 def get_date(date_: str) -> str:
-   try:
+    try:
         dt = datetime.fromisoformat(date_)
         return dt.strftime("%d.%m.%Y")
-   except:
+    except ValueError:
         dt = datetime.fromisoformat(date_[::-1])
         print(dt)
         return dt.strftime("%d.%m.%Y")

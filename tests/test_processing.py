@@ -28,13 +28,12 @@ from src.processing import filter_by_state, sort_by_date
         ]
     ),
     (
-    [
-        {'id': 1, 'state': 'PENDING'},
-        {'id': 2, 'state': 'CANCELLED'},
-        {'id': 3, 'state': 'FAILED'}
-    ],
-        'EXECUTED', # нет такого состояния
-        []
+        [
+            {'id': 1, 'state': 'PENDING'},
+            {'id': 2, 'state': 'CANCELLED'},
+            {'id': 3, 'state': 'FAILED'}
+        ],
+        'EXECUTED',
     )
 ]
 )
@@ -50,7 +49,7 @@ def test_default_state():
         {'id': 2, 'state': 'PENDING'}
     ]
     result = filter_by_state(records)
-    assert result == [{'id': 1, 'state':'EXECUTED'}]
+    assert result == [{'id': 1, 'state': 'EXECUTED'}]
 
 
 @pytest.mark.parametrize(
