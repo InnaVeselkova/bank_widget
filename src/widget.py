@@ -20,19 +20,6 @@ def mask_account_card(type_and_number_of_card_or_account: str) -> str:
         return f"{type_} {masked_number}"
 
 
-def get_date(date_str: str) -> str:
-    # Попытка распарсить дату в нескольких форматах
-    formats = ['%Y-%m-%d', '%d.%m.%Y', '%d/%m/%Y', '%Y/%m/%d']
-    for fmt in formats:
-        try:
-            dt = datetime.strptime(date_str, fmt)
-            return dt.strftime("%d.%m.%Y")
-        except ValueError:
-            continue
-    # Если ни один формат не подошёл, можно вернуть исходную строку или поднять исключение
-    raise ValueError(f"Неподдерживаемый формат даты: {date_str}")
-
-
 def get_date(date_: str) -> str:
    try:
         dt = datetime.fromisoformat(date_)
