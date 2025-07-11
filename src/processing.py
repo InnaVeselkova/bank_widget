@@ -21,4 +21,4 @@ if __name__ == '__main__':
         {'id': 3, 'date': '11-05-2025'},
         {'id': 4, 'date': '2025/11/02'}
     ]
-print(sort_by_date(records))
+    print(sort_by_date(records))
