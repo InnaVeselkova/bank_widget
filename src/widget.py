@@ -21,8 +21,14 @@ def mask_account_card(type_and_number_of_card_or_account: str) -> str:
 
 
 def get_date(date_: str) -> str:
-    dt = datetime.fromisoformat(date_)
-    return dt.strftime("%d.%m.%Y")
+    try:
+        dt = datetime.fromisoformat(date_)
+        return dt.strftime("%d.%m.%Y")
+    except ValueError:
+        dt = datetime.fromisoformat(date_[::-1])
+        print(dt)
+        return dt.strftime("%d.%m.%Y")
+
 
 if __name__ == '__main__':
     print(mask_account_card("Visa Classic 6831982476737658"))

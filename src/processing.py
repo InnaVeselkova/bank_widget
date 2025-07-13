@@ -8,4 +8,17 @@ def filter_by_state(records: List[Dict[str, Any]], state: str = 'EXECUTED') -> L
 
 def sort_by_date(records: List[Dict[str, Any]], reverse: bool = True) -> List[Dict[str, Any]]:
     # Фильтрует список словарей по дате (по умолчанию — убывание)
-    return sorted(records, key=lambda record: record.get('date') or '', reverse=reverse)
+    try:
+        return sorted(records, key=lambda record: record.get('date').replace("/", "-") or '', reverse=reverse)
+    except Exception:
+        raise TypeError("Некорректный формат данных")
+
+
+if __name__ == '__main__':
+    records = [
+        {'id': 1, 'date': '01/11/2025'},
+        {'id': 2, 'date': '2025-11-07'},
+        {'id': 3, 'date': '11-05-2025'},
+        {'id': 4, 'date': '2025/11/02'}
+    ]
+    print(sort_by_date(records))
