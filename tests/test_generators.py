@@ -1,5 +1,4 @@
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
-from tests.conftest import card_numbers_for_test
 
 
 # Тестируем фильтр по USD
@@ -265,11 +264,11 @@ def test_transaction_descriptions():
                     "code": "I"
                 }
             },
-            # Описание отсутствует у этой транзакции, чтобы проверить условие
         }
     ]
     result = list(transaction_descriptions(transactions))
     expected = ["Перевод организации", "Перевод со счета на счет"]
+    assert result == expected
 
 
 # Проверка без поля description
@@ -290,7 +289,7 @@ def test_transaction_descriptions_no_description_field():
     assert result == []
 
 
-#Проверка с пустой строкой
+# Проверка с пустой строкой
 def test_transaction_descriptions_empty_description():
     transactions = [
         {
@@ -344,5 +343,5 @@ def test_card_number_generator_large_range():
 # Тест с end < start, то есть ничего не должно генерироваться
 def test_card_number_generator_empty_range():
     # Если end < start, то ничего не должно генерироваться
-    result = list(card_number_generator(10,9))
+    result = list(card_number_generator(10, 9))
     assert result == []

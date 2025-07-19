@@ -30,6 +30,6 @@ def get_date(date_: str) -> str:
         return dt.strftime("%d.%m.%Y")
 
 
-if __name__ == '__main__': # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
     print(mask_account_card("Visa Classic 6831982476737658"))
     print(get_date("2024-03-11T02:26:18.671407"))
