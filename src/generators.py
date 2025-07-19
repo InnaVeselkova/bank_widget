@@ -17,7 +17,7 @@ def card_number_generator(start: int, end: int) -> Iterator[str]:
     for number in range(start, end + 1):
         yield ' '.join(f"{number:016d}"[i:i + 4] for i in range(0, 16, 4))
 
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
 
     transactions = [
     {
@@ -65,25 +65,25 @@ if __name__ == '__main__':
     }
 ]
 
-# Получаем транзакции в USD
-usd_transactions = filter_by_currency(transactions, 'USD')
+    # Получаем транзакции в USD
+    usd_transactions = filter_by_currency(transactions, 'USD')
 
-# Выводим первые 3 транзакции с валютой USD
-for _ in range(3):
-    try:
-        print(next(usd_transactions))
-    except StopIteration:
-        print("Больше транзакций с валютой USD нет.")
+    # Выводим первые 3 транзакции с валютой USD
+    for _ in range(3):
+        try:
+            print(next(usd_transactions))
+        except StopIteration:
+            print("Больше транзакций с валютой USD нет.")
 
-# Получаем описания всех транзакций
-descriptions = transaction_descriptions(transactions)
+    # Получаем описания всех транзакций
+    descriptions = transaction_descriptions(transactions)
 
-# Выводим первые 3 описания
-for _ in range(3):
-    try:
-        print(next(descriptions))
-    except StopIteration:
-        print("Больше описаний нет.")
+    # Выводим первые 3 описания
+    for _ in range(3):
+        try:
+            print(next(descriptions))
+        except StopIteration:
+            print("Больше описаний нет.")
 
-for card_number in card_number_generator(1, 5):
-    print(card_number)
+    for card_number in card_number_generator(1, 5):
+        print(card_number)
