@@ -14,7 +14,7 @@ def sort_by_date(records: List[Dict[str, Any]], reverse: bool = True) -> List[Di
         raise TypeError("Некорректный формат данных")
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     records = [
         {'id': 1, 'date': '01/11/2025'},
         {'id': 2, 'date': '2025-11-07'},
