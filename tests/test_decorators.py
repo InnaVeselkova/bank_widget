@@ -1,5 +1,5 @@
-import pytest
 from src.decorators import log
+
 
 # Тестирование успешного вызова функции с логированием в файл
 def test_successful_logging(tmp_path):
@@ -55,5 +55,3 @@ def test_exception_logging(tmp_path):
     # Проверяем содержимое файла на наличие информации об ошибке
     content = log_file.read_text(encoding='utf-8')
     assert 'fail_func error: ValueError' in content
-
-
