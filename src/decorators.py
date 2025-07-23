@@ -1,3 +1,9 @@
+"""
+    Декоратор для логирования: записывает в указанный файл или выводит в консоль (при отсутствии файла)
+    результат о начале работы функции и ее успешном выполнении, либо об ошибке
+"""
+
+
 def log(filename=None):
     def wrapper(func):
         def inner(*args, **kwargs):
@@ -19,7 +25,7 @@ def log(filename=None):
                     print(f"{func.__name__} ok")
 
                 return res
-
+# Прописываем обработку ошибки
             except Exception as e:
                 error_type = type(e).__name__
                 if filename:
