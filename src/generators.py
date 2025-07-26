@@ -3,7 +3,7 @@ from typing import List, Dict, Iterator, Any
 
 def filter_by_currency(transactions: List[Dict[str, Any]], currency: str) -> Iterator[Dict[str, Any]]:
     # Генератор фильтрует транзакции по валюте
-   return (t for t in transactions if t['operationAmount']['currency']['code'] == currency)
+    return (t for t in transactions if t['operationAmount']['currency']['code'] == currency)
 
 
 def transaction_descriptions(transactions: List[Dict[str, Any]]) -> Iterator[str]:
