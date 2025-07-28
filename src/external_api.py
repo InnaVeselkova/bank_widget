@@ -10,19 +10,16 @@ load_dotenv()
 exchange_API= os.getenv('API_KEY')
 
 
-def convert_to_rub(amount: float, currency_from: str, currency_to: str) -> float:
+def convert_to_rub(amount: float, currency: str) -> float:
     # Конвертирует из USD или EUR в рубли
-    url = f"https://api.apilayer.com/exchangerates_data/latest"
+    url = f"https://api.apilayer.com/exchangerates_data/covert"
     headers = {
         "apikey": exchange_API
     }
     params = {
-        'base': 'USD',
-        'symbols': 'RUB',
-        'covert' = amount
-        ''
-
-
+        'from': currency,
+        'to': 'RUB',
+        'amount': amount
     }
 
     response = requests.get(url, headers=headers, params=params)
@@ -30,10 +27,14 @@ def convert_to_rub(amount: float, currency_from: str, currency_to: str) -> float
     if response.status_code != 200:
         raise Exception(f"Ошибка при запросе: {response.status_code} - {response.text}")
 
-    # Рассчитываем сумму в рублях
+    # Получение распарсенных данных
     data = response.json()
-    result = data['result']
+
+    # Рассчитываем сумму в рублях
+    result = data.get('result', 0)
     return result
+
+
 
 
 
