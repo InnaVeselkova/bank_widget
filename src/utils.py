@@ -1,7 +1,9 @@
 import json
 import os
+from typing import List, Dict
 
 from data.path import json_path
+from external_api import convert_to_rub
 
 
 def load_transactions(json_path):
@@ -27,6 +29,19 @@ def load_transactions(json_path):
         return []
 
 
+def get_transaction_amount_in_rub(transactions: List[Dict]) -> float:
+    # Функция, которая принимает на вход транзакцию и возвращает сумму транзакции в рублях
+    for transaction in transactions:
+        amount = transaction.get('amount', 0)
+        currency= transaction.get('currency', {}).get('code')
+
+        if currency == 'RUB':
+            result = amount
+            return result
+        else:
+            return convert_to_rub(amount, currency)
+
 if __name__ == '__main__':  # pragma: no cover
     data = load_transactions(json_path)
-    print(data)
+    result = get_transaction_amount_in_rub(data)
+    print(result)
