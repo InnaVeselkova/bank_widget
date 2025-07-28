@@ -7,7 +7,7 @@ import requests
 load_dotenv()
 
 # Получение значения переменной exchange_API из .env-файла
-exchange_API= os.getenv('API_KEY')
+exchange_API = os.getenv('API_KEY')
 
 
 def convert_to_rub(currency: str) -> float:

@@ -36,7 +36,7 @@ def test_load_transactions_data_not():
     # Проверяем работу функции, если файл пустой
     filename = 'test_invalid_data.json'
     with open(filename, 'w', encoding='utf-8') as f:
-    # Ничего не записываем
+        # Ничего не записываем
         f.write('')
     result = load_transactions(filename)
     assert result == []
@@ -46,8 +46,8 @@ def test_load_transactions_data_not():
 
 @pytest.mark.parametrize(
     "data, expected",
-[
-    (
+    [
+        (
             {
                 "id": 441945886,
                 "state": "EXECUTED",
@@ -103,10 +103,7 @@ def test_load_transactions_data_not():
         )
     ]
 )
-
-
 def test_get_transaction_amount_in_rub(data, expected):
-
     """
     Проверка корректности работы при разных условиях (валюта: рубли, количество: указано;
     валюта: рубли, количество: не указано; валюта: RUB, количество: float)
