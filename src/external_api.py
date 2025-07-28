@@ -31,12 +31,3 @@ def convert_to_rub(currency: str) -> float:
     # Рассчитываем сумму в рублях
     result = data.get('rates', {}).get('RUB', 0)
     return float(result)
-
-
-
-
-
-
-
-
-
