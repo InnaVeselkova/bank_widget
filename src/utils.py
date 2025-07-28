@@ -1,8 +1,8 @@
 import json
 import os
-from typing import List, Dict
+from typing import Dict
 
-from data.path import json_path
+from path import json_path
 from external_api import convert_to_rub
 
 
@@ -14,39 +14,42 @@ def load_transactions(json_path):
 
     try:
         with open(json_path, 'r', encoding='utf-8') as f:
-            content = f.read().strip()
-            if not content:
-                # Файл пустой
-                return []
-            data = json.loads(content)
+            data = json.load(f)
             if isinstance(data, list):
                 return data
             else:
                 # Не список
                 return []
-    except (json.JSONDecodeError):
+    except json.JSONDecodeError:
         # Ошибка чтения файла
         return []
 
 
-def get_transaction_amount_in_rub(transactions: List[Dict]) -> float:
+def get_transaction_amount_in_rub(transaction: Dict) -> float:
     # Функция, которая принимает на вход транзакцию и возвращает сумму транзакции в рублях
-    for transaction in transactions:
-        amount = transaction.get("operationAmount", {}).get('amount', 0)
-        currency= transaction.get("operationAmount", {}).get('currency', {}).get('code')
 
-        if currency == 'RUB':
-            result = amount
-            return result
-        else:
-            return convert_to_rub(amount, currency)
+    amount = transaction.get("operationAmount", {}).get('amount', 0)
+    currency= transaction.get("operationAmount", {}).get('currency', {}).get('code')
+
+    if currency == 'RUB':
+        return amount
+    else:
+        return convert_to_rub(currency) * float(amount)
 
 if __name__ == '__main__':  # pragma: no cover
 
-    data = load_transactions(json_path)
-
-    transactions_amount = []
-    result = get_transaction_amount_in_rub(data)
-    transactions_amount.append(result)
-
-print(transactions_amount)
+    print(get_transaction_amount_in_rub(  {
+    "id": 441945886,
+    "state": "EXECUTED",
+    "date": "2019-08-26T10:50:58.294041",
+    "operationAmount": {
+      "amount": "31957.58",
+      "currency": {
+        "name": "руб.",
+        "code": "USD"
+      }
+    },
+    "description": "Перевод организации",
+    "from": "Maestro 1596837868705199",
+    "to": "Счет 64686473678894779589"
+  }))

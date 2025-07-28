@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 import requests
-import json
+
 
 # Загрузка переменных из .env-файла
 load_dotenv()
@@ -10,18 +10,16 @@ load_dotenv()
 exchange_API= os.getenv('API_KEY')
 
 
-def convert_to_rub(amount: float, currency: str) -> float:
+def convert_to_rub(currency: str) -> float:
     # Конвертирует из USD или EUR в рубли
-    url = f"https://api.apilayer.com/exchangerates_data/covert"
+    url = f"https://api.apilayer.com/exchangerates_data/latest"
     headers = {
         "apikey": exchange_API
     }
     params = {
-        'from': currency,
-        'to': 'RUB',
-        'amount': amount
+        'base': currency,
+        'symbols': 'RUB',
     }
-
     response = requests.get(url, headers=headers, params=params)
 
     if response.status_code != 200:
@@ -31,8 +29,8 @@ def convert_to_rub(amount: float, currency: str) -> float:
     data = response.json()
 
     # Рассчитываем сумму в рублях
-    result = data.get('result', 0)
-    return result
+    result = data.get('rates', {}).get('RUB', 0)
+    return float(result)
 
 
 
