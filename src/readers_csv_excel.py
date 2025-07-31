@@ -1,12 +1,13 @@
 import csv
 import os
+from typing import Dict, List
+
 import pandas as pd
-from typing import List, Dict
 
 csv_path = "../data/transactions.csv"
 
 
-def load_transactions_from_csv() -> List[Dict]:
+def load_transactions_from_csv(csv_path: str) -> List[Dict]:
     """
     Загружает транзакции из CSV файла
     """
@@ -28,7 +29,7 @@ def load_transactions_from_csv() -> List[Dict]:
 excel_path = "../data/transactions_excel.xlsx"
 
 
-def load_transactions_from_excel() -> List[Dict]:
+def load_transactions_from_excel(excel_path: str) -> List[Dict]:
     """
     Загружает транзакции из файла Excel в виде списка словарей
     """
@@ -50,5 +51,5 @@ def load_transactions_from_excel() -> List[Dict]:
 
 
 if __name__ == '__main__':  # pragma: no cover
-    print(load_transactions_from_csv())
-    print(load_transactions_from_excel())
+    print(load_transactions_from_csv(csv_path))
+    print(load_transactions_from_excel(excel_path))
