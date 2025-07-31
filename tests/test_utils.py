@@ -1,8 +1,9 @@
 import json
 import os
+
 import pytest
 
-from src.utils import load_transactions, get_transaction_amount_in_rub
+from src.utils import get_transaction_amount_in_rub, load_transactions
 
 
 def test_load_transactions_valid_json_list():

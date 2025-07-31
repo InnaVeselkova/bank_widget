@@ -1,7 +1,9 @@
 import os
 from unittest.mock import patch
-from src.external_api import convert_to_rub
+
 from dotenv import load_dotenv
+
+from src.external_api import convert_to_rub
 
 load_dotenv()
 

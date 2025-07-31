@@ -1,7 +1,7 @@
 import json
+import logging
 import os
 from typing import Dict
-import logging
 
 # Получение корневого логера
 root_logger = logging.getLogger()
