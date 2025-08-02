@@ -19,7 +19,7 @@ def load_transactions_from_csv(csv_path: str) -> List[Dict]:
 
     # Читаем файл и добавляем каждую транзакцию в список транзакций
     with open(csv_path, 'r', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
+        reader = csv.DictReader(csvfile, delimiter=';')
         for row in reader:
             transactions_csv.append(row)
 
