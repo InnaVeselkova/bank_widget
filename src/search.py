@@ -14,6 +14,3 @@ def process_bank_search(data: List[Dict], search: str) -> List[Dict]:
             result.append(transaction)
 
     return result
-
-
-if __name__ == '__main__':  # pragma: no cover
