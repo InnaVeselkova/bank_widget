@@ -28,7 +28,6 @@ def process_bank_operations(data: List[Dict], categories: List[str]) -> Dict[str
                 if category not in counts:
                     counts[category] = 0
                 counts[category] += 1
-                break
     return counts
 
 

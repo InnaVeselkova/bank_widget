@@ -1,6 +1,6 @@
 import pytest
 
-from src.processing import filter_by_state, sort_by_date
+from src.processing import filter_by_state, sort_by_date, process_bank_operations
 
 
 @pytest.mark.parametrize("records, state, expected", [
@@ -111,3 +111,54 @@ def test_invalied_date():
     with pytest.raises(TypeError):
 
         sort_by_date('test')
+
+
+def test_process_bank_operations_basic():
+    data = [
+        {'id': 1, 'description': 'Оплата за интернет'},
+        {'id': 2, 'description': 'Покупка в магазине'},
+        {'id': 3, 'description': 'Оплата коммунальных услуг'},
+        {'id': 4, 'description': 'Платеж за телефон'},
+        {'id': 5, 'description': 'Оплата за интернет и телевидение'},
+    ]
+    categories = ['интернет', 'магазин', 'телефон']
+
+    result = process_bank_operations(data, categories)
+
+    assert result == {
+        'интернет': 2,
+        'магазин': 1,
+        'телефон': 1
+    }
+
+
+def test_process_bank_operations_no_matches():
+    data = [
+        {'id': 1, 'description': 'Покупка в магазине'},
+        {'id': 2, 'description': 'Платеж за коммунальные услуги'},
+    ]
+    categories = ['авто', 'еда']
+
+    result = process_bank_operations(data, categories)
+
+    # Ожидается пустой словарь, так как совпадений нет
+    assert result == {}
+
+
+def test_process_bank_operations_partial_matches():
+    data = [
+        {'id': 1, 'description': 'Оплата за интернет'},
+        {'id': 2, 'description': 'Покупка в магазине'},
+        {'id': 3, 'description': ''},  # пустое описание
+        {'id': 4, 'description': 'Оплата за телефон и интернет'},
+    ]
+    categories = ['интернет', 'магазин', 'телефон']
+
+    result = process_bank_operations(data, categories)
+
+    assert result == {
+        'интернет': 2,
+        'магазин': 1,
+        'телефон': 1
+    }
+
