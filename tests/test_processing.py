@@ -161,4 +161,3 @@ def test_process_bank_operations_partial_matches():
         'магазин': 1,
         'телефон': 1
     }
-
