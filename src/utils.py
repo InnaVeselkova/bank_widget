@@ -1,7 +1,10 @@
 import json
 import logging
 import os
-from typing import Dict
+from typing import Dict, List, Any
+from src.widget import get_date, mask_account_card
+from src.external_api import convert_to_rub
+
 
 # Получение корневого логера
 root_logger = logging.getLogger()
@@ -61,6 +64,41 @@ def get_transaction_amount_in_rub(transaction: Dict) -> float:
         app_logger_utils.info(f"Транзакция {transaction} в валюте {currency}")
         from external_api import convert_to_rub
         return convert_to_rub(currency) * float(amount)
+
+
+def _print_transactions(transactions: List[Dict[str, Any]]) -> None:
+    """Выводит отформатированный список транзакций."""
+    print("\nРаспечатываю итоговый список транзакций...")
+    print(f"\nВсего банковских операций в выборке: {len(transactions)}\n")
+
+    for transaction in transactions:
+        date = get_date(transaction['date']) if 'date' in transaction else 'Нет даты'
+        description = transaction.get('description', 'Без описания')
+
+        # Обработка отправителя и получателя
+        from_info = mask_account_card(transaction.get('from', '')) if transaction.get('from') else ''
+        to_info = mask_account_card(transaction.get('to', '')) if transaction.get('to') else ''
+
+        # Обработка суммы
+        amount_info = transaction.get('operationAmount', {})
+        amount = float(amount_info.get('amount', 0)) if amount_info.get('amount') else 0
+        currency = amount_info.get('currency', {}).get('code', '')
+
+        if currency and currency != 'RUB':
+            amount_rub = convert_to_rub(transaction)
+            amount_str = f"{amount} {currency} (~{amount_rub:.2f} руб.)" if amount_rub else f"{amount} {currency}"
+        else:
+            amount_str = f"{amount} руб."
+
+        # Вывод информации о транзакции
+        print(f"{date} {description}")
+        if from_info and to_info:
+            print(f"{from_info} -> {to_info}")
+        elif from_info:
+            print(f"{from_info}")
+        elif to_info:
+            print(f"{to_info}")
+        print(f"Сумма: {amount_str}\n")
 
 
 if __name__ == '__main__':  # pragma: no cover
