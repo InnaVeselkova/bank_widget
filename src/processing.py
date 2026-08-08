@@ -14,6 +14,23 @@ def sort_by_date(records: List[Dict[str, Any]], reverse: bool = True) -> List[Di
         raise TypeError("Некорректный формат данных")
 
 
+def process_bank_operations(data: List[Dict], categories: List[str]) -> Dict[str, int]:
+    """
+    Подсчитывает количество операций для каждой категории
+    """
+    # Инициализируем словарь с нулями для каждой категории
+    counts = {}
+
+    for transaction in data:
+        description = transaction .get('description', '').lower()
+        for category in categories:
+            if category.lower() in description:
+                if category not in counts:
+                    counts[category] = 0
+                counts[category] += 1
+    return counts
+
+
 if __name__ == '__main__':  # pragma: no cover
     records = [
         {'id': 1, 'date': '01/11/2025'},
